@@ -156,9 +156,15 @@ Verify all of this yourself; it is orientation, not authority.
 - **Land** — UUPA (UU 5/1960), PP 18/2021, PP 24/1997 on pendaftaran tanah, and
   the ATR/BPN Permen layer. Electronic certificates are recent: find the current
   Permen ATR/BPN rather than assuming.
-- **Tax procedure** — UU KUP (UU 6/1983 as amended, most recently through UU
-  7/2021 HPP and UU 6/2023), plus **PMK 111/2025 on Pengawasan Kepatuhan Wajib
-  Pajak**, which is confirmed real and current.
+- **Tax procedure** — UU KUP (UU 6/1983). **CORRECTED: the operative last
+  amendment is UU 6/2023 Pasal 113 alone**, not UU 7/2021 and UU 6/2023 as
+  parallel endpoints — PMK 111/2025's own Pasal 1 angka 1 defines KUP as
+  "terakhir diubah dengan UU 6/2023". UU 6/2023 Pasal 113 does exactly nine
+  things: amends Pasal 9, 11, 15, 17B, 19, 38; deletes Pasal 13A and 27A;
+  inserts 27B. Full chain: UU 6/1983 → 9/1994 → 16/2000 → 28/2007 →
+  Perpu 5/2008 (UU 16/2009) → UU 11/2020 → UU 7/2021 HPP → UU 6/2023.
+  Plus **PMK 111/2025 on Pengawasan Kepatuhan Wajib Pajak**, confirmed real
+  and current (corpus doc 162316).
 - **Environment** — UU 32/2009 PPLH as amended by UU 6/2023, PP 22/2021, and
   **PP 28/2025** for the licensing interface. **PP 5/2021 is REPEALED** —
   revoked by PP 28/2025 on 5 June 2025 (Pasal 550 huruf b jo. Pasal 552).
@@ -552,3 +558,48 @@ that its citations are real.
   `putusan3.mahkamahagung.go.id`, `jdih.mahkamahagung.go.id`, `bphn.go.id`,
   `hukumonline.com`. Working: `peraturan.bpk.go.id`, `peraturan.go.id/files/`,
   `kepaniteraan.mahkamahagung.go.id`. A 403 is not evidence about the law.
+
+---
+
+## 18. Added post-wave-3 — how to run a §13 check when mkri.id blocks you
+
+`mkri.id` returns **403 to automated fetchers**, and §17 warns that BPK's
+`UJI MATERI` field reading *"Belum Tersedia"* is not a clean negative. Both are
+true, and together they made §13 look unrunnable. It is not.
+
+**BPK indexes uji materi on the AMENDING instrument's page, not the parent
+statute's.** UU 6/1983's own page reads "Belum Tersedia"; the decisions live on
+the pages of the laws that amended it, and BPK serves the full decision PDFs at
+`peraturan.bpk.go.id/DownloadUjiMateri/<n>/...`. Two decisions on KUP were found
+this way after the parent page reported nothing.
+
+So a §13 check is: enumerate the amendment chain first (§16), then check
+**every instrument in it**, not just the parent. Read the amar and the
+pronouncement date out of the PDF yourself.
+
+### A §13 hit against stale text is worse than no check at all
+
+**Putusan MK 63/PUU-XV/2017 conditioned KUP Pasal 32 ayat (3a). UU 7/2021 HPP
+Pasal 2 angka 9 then replaced that ayat and deleted the exact phrase the Court
+had conditioned.** Citing the decision as governing law would have been wrong
+*because* the §13 check succeeded — the decision is real, and it applies to text
+that no longer exists.
+
+This is §14 in the flesh: **establish the current text first, then check the MK
+against that text.** Where a decision predates an amendment that moved the
+provision, say so and present it as dated context, not as the operative rule.
+
+### KUP chain — corrected again
+
+BPK's structured `Diubah dengan` list on the UU 6/1983 page enumerates every
+amending instrument: **UU 6/2023 · Perpu 2/2022 · UU 7/2021 · UU 11/2020 ·
+Perpu 1/2020 · UU 16/2009 · UU 28/2007 · UU 16/2000 · UU 9/1994**. §6 of this
+brief omitted **Perpu 1/2020** (enacted as UU 2/2020). Prefer that structured
+field over any chain stated in a brief, including this one.
+
+### Density has an honest ceiling
+
+The rewritten SP2DK pillar carries **12 distinct `Pasal` against a site mean of
+17.9**, and that is the right number: its law genuinely lives in one PMK plus a
+handful of KUP articles. Reaching the mean would have meant citing articles the
+topic does not rest on. **§17 stands — density is a symptom, never a target.**
