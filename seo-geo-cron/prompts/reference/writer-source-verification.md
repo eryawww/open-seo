@@ -603,3 +603,60 @@ The rewritten SP2DK pillar carries **12 distinct `Pasal` against a site mean of
 17.9**, and that is the right number: its law genuinely lives in one PMK plus a
 handful of KUP articles. Reaching the mean would have meant citing articles the
 topic does not rest on. **§17 stands — density is a symptom, never a target.**
+
+---
+
+## 19. Added in the GEO cycle — a sixth corpus failure, two lookup traps, and how to run an evidence-heavy post
+
+### The corpus can return 200 with no law in it
+
+`markdown/895` (UU 9/2009) returns **HTTP 200 with an empty text layer** — about
+1,807 characters of page markers and **zero `Pasal` tokens**. The response is
+structurally well-formed and carries no statute.
+
+This is distinct from every mode already listed: not the §5 image-only scan
+(0 bytes of text), not §10 glyph corruption (wrong characters), not §12 heading
+misalignment (right text, wrong number), not §15's malformed PDF (unparseable
+file). **Check that a `markdown/` response actually contains `Pasal` tokens
+before treating it as the statute.** A zero count means you do not have the law,
+whatever the status code says.
+
+### Corpus doc_ids are NOT BPK ids
+
+`peraturan.bpk.go.id/Details/<corpus doc_id>/…` looks plausible and is wrong:
+`Details/895/uu-no-9-tahun-2009` 404s, because UU 9/2009's BPK id is 38596.
+**Take the BPK URL from `title-search`'s `raw_url` field**, never by
+substituting a corpus id into a BPK path. A citation built that way points at
+nothing or, worse, at a different instrument.
+
+### `title-search` misses amending laws by their own title
+
+It does not surface **UU 16/2019** at all, even queried on its exact amending
+title, although the per-document hub for it exists on the site. Add this to §1's
+list of false-negative modes: absence from `title-search` is not absence from
+the corpus, and the site's own `/peraturan` hubs are a second index worth
+checking.
+
+### Running an evidence-heavy post: hand over the evidence, not the research task
+
+A writer run exited **code 0 after ~8 minutes having published nothing** — it
+spent its whole budget re-deriving research the brief already demanded.
+
+**For posts whose value is the evidence rather than the exposition, do the
+verification in the orchestrator and hand the writer a pre-verified evidence
+pack** — every claim with its URL, its HTTP status, and the exact quoted text —
+then scope the writer's job to **draft → publish → verify**. The same run
+afterwards completed cleanly in 71,605 tokens.
+
+This does not weaken §17. The orchestrator still spot-checks five sources
+independently, and still counts links from the rendered page.
+
+### Two operational notes
+
+- **`www.klaussa.com` returns transient 503s under modest concurrent load** and
+  200 on the same URL seconds later. Retry before believing a 503 — on a link
+  check, a single failure is not evidence a page is dead.
+- **Publishing a claim you could not retrieve is the one flaw that discredits an
+  evidence post.** Where a characterisation rests on a document you could not
+  fetch, attribute it to that document by name and date rather than asserting it
+  as something read. State what the retrievable source actually says.
