@@ -55,10 +55,15 @@ Either way, you need a DataForSEO API key to get SEO data. See [`docs/DATAFORSEO
 ## Adapting OpenSEO to Another Platform
 
 This is a playbook for pointing a self-hosted OpenSEO instance at a product you
-own and running it as a continuous SEO + GEO loop — an agent that acts on a
-schedule — rather than a dashboard someone remembers to open. GEO here means
-Generative Engine Optimization: being cited by ChatGPT, Claude, Gemini and
-Perplexity, which is measured separately from classic search rank.
+own. GEO here means Generative Engine Optimization: being cited by ChatGPT,
+Claude, Gemini and Perplexity, which is measured separately from classic search
+rank.
+
+Steps 1–5 are the setup and happen once. Steps 6–7 turn the result into a
+recurring loop that acts on its own — **that part is optional**, and the
+mechanism for it is entirely platform-specific. Steps 1–5 are worth doing on
+their own; plenty of setups stop there and drive the tools by hand or from an
+agent session.
 
 > **Scope note.** Steps 1, 3, 4 and 5 work on `main` as-is. Steps 2, 6 and 7
 > depend on additions that live on this fork's `feat/seo-geo-cron` branch and
@@ -69,20 +74,20 @@ Perplexity, which is measured separately from classic search rank.
 ### The loop you are building
 
 ```
-  once ──► 1. deploy instance          your own Cloudflare Worker or Docker host
-           2. headless credential      agent authenticates without a human
-           3. project + context        who you are, who you compete with
-           4. connect GSC / GA4        first-party truth, free to query
+  setup ─────► 1. deploy instance       your own Cloudflare Worker or Docker host
+  (once)       2. headless credential   optional — only for unattended runs
+               3. project + context     who you are, who you compete with
+               4. connect GSC / GA4     first-party truth, free to query
+               5. define action space   what the agent is allowed to DO
 
-  daily ─► 5. observe                  rank, audit, citations, console data
-           6. decide                   map each signal to one allowed action
-           7. act + record             draft, escalate, or fix — then measure
-              └──────────────────────► back to 5, with outcomes judged later
+  loop ──────► 6. schedule the jobs     OPTIONAL — mechanism is platform-specific
+  (optional)   7. act, record, judge    draft, escalate or fix — then measure
+                  └───────────────────► back to 6; outcomes judged a later run
 ```
 
-Steps 1–4 are setup and happen once. Steps 5–7 repeat on a schedule, and the
-only thing that makes the loop worth running is that step 7 writes down what it
-did so a later run can judge whether it worked.
+These numbers match the section numbers below. Steps 6 and 7 are where the
+system stops being a dashboard and starts acting on its own — worth building
+only once steps 1–5 give it something trustworthy to act on.
 
 ### 1. Deploy an instance
 
@@ -166,12 +171,25 @@ split is three buckets plus an implicit fourth:
 Write this mapping down before the first job runs. Without it, each run
 re-derives its own policy and the system drifts.
 
-### 6. Schedule the jobs
+### 6. Schedule the jobs — optional
 
-*Requires the `feat/seo-geo-cron` branch.*
+*Optional. Requires the `feat/seo-geo-cron` branch.*
 
-`seo-geo-cron/` holds a worked example: one prompt per job, a shared preamble
-concatenated into each, and a runner invoked by cron.
+Nothing above requires a scheduler. Steps 1–5 already give you a working
+instance an agent can query on demand, and that is a reasonable place to stop.
+This step exists for when you want the work to happen whether or not anyone
+remembers to ask.
+
+**How you schedule is platform-specific, and the choice matters more than the
+prompts.** Unix cron on a box you already run, GitHub Actions on a schedule,
+Cloudflare Cron Triggers, a queue worker, or your platform's own job runner are
+all fine. Pick whichever already has your credentials, your log retention and
+your alerting — a scheduler nobody watches is worse than no scheduler, because
+it fails silently and you keep believing the loop is running.
+
+`seo-geo-cron/` holds one worked example of the shape — Unix cron calling a
+shell runner — with one prompt per job and a shared preamble concatenated into
+each. Read it for the structure, not the mechanism.
 
 ```
 seo-geo-cron/
@@ -204,6 +222,11 @@ run per job** so a bad day cannot open twenty tickets.
 
 An agent that only reports is a worse dashboard. The value comes from acting
 and then grading the action.
+
+This applies whether or not you completed step 6. A human running these tools
+by hand still benefits from recording what was changed and re-checking it
+later — the scheduler only decides *when* the loop turns, not whether the
+record is worth keeping.
 
 **Act through an account that cannot approve itself.** Publish via your
 platform's own API using a writer-role service account that is structurally
