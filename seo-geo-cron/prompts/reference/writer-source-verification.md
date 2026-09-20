@@ -567,15 +567,34 @@ that its citations are real.
 `UJI MATERI` field reading *"Belum Tersedia"* is not a clean negative. Both are
 true, and together they made §13 look unrunnable. It is not.
 
-**BPK indexes uji materi on the AMENDING instrument's page, not the parent
-statute's.** UU 6/1983's own page reads "Belum Tersedia"; the decisions live on
-the pages of the laws that amended it, and BPK serves the full decision PDFs at
-`peraturan.bpk.go.id/DownloadUjiMateri/<n>/...`. Two decisions on KUP were found
-this way after the parent page reported nothing.
+**BPK indexes uji materi across the whole family of a statute — the parent's
+page AND its amending instruments' pages — and either may be the one that
+carries a given decision.** Check all of them.
 
-So a §13 check is: enumerate the amendment chain first (§16), then check
-**every instrument in it**, not just the parent. Read the amar and the
+- UU 6/1983's own page reads "Belum Tersedia"; two decisions on KUP were found
+  on the pages of laws that **amended** it.
+- UU 9/2009 has **no** amending instrument, and its decision sits on the
+  **parent's own page** (`Details/38596/`), which is also where the download
+  link lives.
+
+BPK serves the full decision PDFs at
+`peraturan.bpk.go.id/DownloadUjiMateri/<n>/...`. Read the amar and the
 pronouncement date out of the PDF yourself.
+
+**"Belum Tersedia" is not even reliable about the page printing it.** BPK's
+UU 9/2009 page contains that string *and* a real, downloadable decision at the
+same time. Treat the structured field as decoration; look for a
+`DownloadUjiMateri` link on the page regardless of what the field says.
+
+So a §13 check is: enumerate the amendment chain first (§16), then check the
+parent **and** every instrument in it — and on each page, look past the status
+field to the actual links.
+
+**Identifiers of the same decision differ between renderings.** The UU 9/2009
+decision's own header prints `11-14-21-126 dan 136/PUU-VII/2009`; PP 66/2010
+recites it as `11-14-21-126-136/PUU-VII/2009`. Neither is a typo; they are
+different conventions for the same joined cases. Where two sources disagree on
+an identifier, go to the original and say which form you are using.
 
 ### A §13 hit against stale text is worse than no check at all
 
