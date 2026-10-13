@@ -38,9 +38,11 @@ dist-sourcemaps/
 # Localflare generated files
 .localflare/
 
-# Local Claude config (skills are shared)
+# Local Claude config (skills, rules and the cloud-session hook are shared)
 .claude/*
 !.claude/skills/
+!.claude/rules/
+!.claude/settings.json
 
 # Alchemy local state + bundle artifacts (SaaS deploys)
 .alchemy/
