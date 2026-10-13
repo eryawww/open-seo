@@ -39,8 +39,9 @@ this repository alone cannot reach that repository (a routine with two repositor
 - **A failed push stops new work.** If a push reports that R2 changed since this run pulled it, another run is writing
   the same state: draft nothing more, record every `blog_id` drafted this run in an escalation (below), and end.
 - **Escalations.** `gh issue create --repo klaussaindonesia/klaussa_fe` cannot work here: the routine reaches only
-  this repository, and the cloud GitHub proxy blocks `gh issue` and `gh pr` outright. Where `_common.md` or the job
-  file says to escalate:
+  this repository, and the cloud GitHub proxy blocks `gh issue` and `gh pr` outright. Commenting on an existing
+  `klaussa_fe` issue, or reading `klaussa_fe`/`klaussa-lab` source, fails for the same reason. Where `_common.md`, the
+  job file or the research log says to escalate or to comment on an issue:
   1. append one `appendResearchLog` entry starting `[ESCALATION] <the issue title>` with the facts the issue body
      would have carried (one line, under 1000 characters);
   2. start the run's final message with the same title and facts.
