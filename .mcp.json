@@ -1,0 +1,12 @@
+{
+  "mcpServers": {
+    "openseo-cron": {
+      "type": "http",
+      "url": "${OPENSEO_MCP_URL:-http://localhost:3001/mcp}",
+      "headers": {
+        "CF-Access-Client-Id": "${OPENSEO_ACCESS_CLIENT_ID:-}",
+        "CF-Access-Client-Secret": "${OPENSEO_ACCESS_CLIENT_SECRET:-}"
+      }
+    }
+  }
+}
