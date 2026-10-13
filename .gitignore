@@ -48,6 +48,7 @@ dist-sourcemaps/
 # seo-geo-cron: local GEO history + logs, the klaussa_fe workspace clone,
 # and the local secrets file (writer bot creds, blog-review-email HMAC secret)
 seo-geo-cron/data/*.sqlite
+seo-geo-cron/data/.*.etag
 seo-geo-cron/data/*.log
 seo-geo-cron/klaussa_fe-workspace/
 seo-geo-cron/.env.local
